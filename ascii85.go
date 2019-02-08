@@ -26,8 +26,6 @@ func checkAscii85(r byte) byte {
 
 func (a *alphaReader) Read(p []byte) (int, error) {
 	n, err := a.reader.Read(p)
-	if err == io.EOF {
-	}
 	if err != nil {
 		return n, err
 	}
@@ -40,6 +38,7 @@ func (a *alphaReader) Read(p []byte) (int, error) {
 		}
 		if char > 1 {
 			buf[i] = char
+			continue
 		}
 		if char == 1 {
 			tilda = true // possible end of data
